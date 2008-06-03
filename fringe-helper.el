@@ -49,6 +49,8 @@
 ;;
 ;;; Change Log:
 ;;
+;;    Fixed `fringe-lib-load' to work when already loaded.
+;;
 ;; 2008-04-25 (0.1)
 ;;    Initial release.
 ;;
@@ -205,8 +207,8 @@ SIDE should be either 'left-fringe or 'right-fringe and defaults to the former."
     (while (> (caar pattern) fringe-width)
       (pop pattern))
     (setq pattern (cdar pattern))
-    (unless (memq (car pattern) fringe-bitmaps)
-      (define-fringe-bitmap (car pattern) (cdr pattern) nil nil alignment))))
+    (or (car (memq (car pattern) fringe-bitmaps))
+        (define-fringe-bitmap (car pattern) (cdr pattern) nil nil alignment))))
 
 
 (defconst fringe-lib-exclamation-mark
