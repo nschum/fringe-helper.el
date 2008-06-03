@@ -181,7 +181,7 @@ input automatically."
 (defun fringe-lib-load (pattern &optional side)
   "Load a stock bitmap.
 It returns the symbol name of the loaded bitmap, which is suitable for passing
-to `fringe-helper-insert'.
+to `fringe-helper-insert'.  The actual work of defining the bitmap is only done once.
 PATTERN can be one of the following:
 
 `fringe-lib-exclamation-mark':  an exclamation mark
@@ -194,7 +194,9 @@ PATTERN can be one of the following:
 
 `fringe-lib-stipple':  a stipple pattern
 
-`fringe-lib-full':  a solid color"
+`fringe-lib-full':  a solid color
+
+SIDE should be either 'left-fringe or 'right-fringe and defaults to the former."
   (let ((fringe-width (frame-parameter (selected-frame)
                                        (or side 'left-fringe)))
         (alignment (when (eq (car pattern) 'repeat)
