@@ -47,6 +47,32 @@
 ;; `fringe-helper-insert-region' inserts a fringe bitmap along a region.
 ;; `fringe-helper-remove' removes both kinds.
 ;;
+;;
+;; Here's an example for enhancing `flymake-mode' with fringe bitmaps:
+;;
+;; (require 'fringe-helper)
+;; (require 'flymake)
+;;
+;; (defvar flymake-fringe-overlays nil)
+;; (make-variable-buffer-local 'flymake-fringe-overlays)
+;;
+;; (defadvice flymake-make-overlay (after add-to-fringe first
+;;                                  (beg end tooltip-text face mouse-face)
+;;                                  activate compile)
+;;   (push (fringe-helper-insert-region
+;;          beg end
+;;          (fringe-lib-load (if (eq face 'flymake-errline)
+;;                               fringe-lib-exclamation-mark
+;;                             fringe-lib-question-mark))
+;;          'left-fringe 'font-lock-warning-face)
+;;         flymake-fringe-overlays))
+;;
+;; (defadvice flymake-delete-own-overlays (after remove-from-fringe activate
+;;                                         compile)
+;;   (mapc 'fringe-helper-remove flymake-fringe-overlays)
+;;   (setq flymake-fringe-overlays nil))
+;;
+;;
 ;;; Change Log:
 ;;
 ;;    Fixed `fringe-lib-load' to work when already loaded.
