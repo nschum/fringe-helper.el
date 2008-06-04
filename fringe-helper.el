@@ -75,6 +75,7 @@
 ;;
 ;;; Change Log:
 ;;
+;;    Fixed bug where `fringe-helper-remove' missed overlays at the end.
 ;;    Fixed `fringe-lib-load' to work when already loaded.
 ;;
 ;; 2008-04-25 (0.1)
@@ -199,7 +200,7 @@ input automatically."
               (overlay-get fringe-bitmap-reference 'fringe-helper-parent))
     ;; region
     (dolist (ov (overlays-in (overlay-start fringe-bitmap-reference)
-                             (overlay-end fringe-bitmap-reference)))
+                             (1+ (overlay-end fringe-bitmap-reference))))
       (when (eq (overlay-get ov 'fringe-helper-parent) fringe-bitmap-reference)
         (delete-overlay ov)))
     (delete-overlay fringe-bitmap-reference)))
