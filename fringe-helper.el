@@ -3,7 +3,7 @@
 ;; Copyright (C) 2008 Nikolaj Schumacher
 ;;
 ;; Author: Nikolaj Schumacher <bugs * nschum de>
-;; Version: 0.1
+;; Version: 0.1.1
 ;; Keywords: lisp
 ;; URL: http://nschum.de/src/emacs/fringe-helper/
 ;; Compatibility: GNU Emacs 22.x
@@ -75,6 +75,7 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2008-06-04 (0.1.1)
 ;;    Fixed bug where `fringe-helper-remove' missed overlays at the end.
 ;;    Fixed `fringe-lib-load' to work when already loaded.
 ;;
