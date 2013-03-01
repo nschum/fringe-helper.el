@@ -241,94 +241,86 @@ SIDE should be either 'left-fringe or 'right-fringe and defaults to the former."
 
 (defconst fringe-lib-exclamation-mark
   `((5 fringe-lib-exclamation-mark-5 .
-       ,(eval-when-compile
-          (fringe-helper-convert "...XX..."
-                                 "..XXXX.."
-                                 "..XXXX.."
-                                 "...XX..."
-                                 "...XX..."
-                                 "........"
-                                 "........"
-                                 "...XX..."
-                                 "...XX...")))
+       ,(fringe-helper-convert "...XX..."
+                               "..XXXX.."
+                               "..XXXX.."
+                               "...XX..."
+                               "...XX..."
+                               "........"
+                               "........"
+                               "...XX..."
+                               "...XX..."))
     (0 fringe-lib-exclamation-mark-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert ".XX....."
-                                 ".XX....."
-                                 ".XX....."
-                                 ".XX....."
-                                 ".XX....."
-                                 "........"
-                                 "........"
-                                 ".XX....."
-                                 ".XX.....")))))
+       ,(fringe-helper-convert ".XX....."
+                               ".XX....."
+                               ".XX....."
+                               ".XX....."
+                               ".XX....."
+                               "........"
+                               "........"
+                               ".XX....."
+                               ".XX....."))))
 
 (defconst fringe-lib-question-mark
   `((5 fringe-lib-question-mark-5 .
-       ,(eval-when-compile
-          (fringe-helper-convert "...XX..."
-                                 "..XXXX.."
-                                 "..X..X.."
-                                 "....XX.."
-                                 "...XX..."
-                                 "...XX..."
-                                 "........"
-                                 "...XX..."
-                                 "...XX...")))
+       ,(fringe-helper-convert "...XX..."
+                               "..XXXX.."
+                               "..X..X.."
+                               "....XX.."
+                               "...XX..."
+                               "...XX..."
+                               "........"
+                               "...XX..."
+                               "...XX..."))
     (0 fringe-lib-question-mark-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert ".XX....."
-                                 "XXXX...."
-                                 "X..X...."
-                                 "..XX...."
-                                 ".XX....."
-                                 ".XX....."
-                                 "........"
-                                 ".XX....."
-                                 ".XX.....")))))
+       ,(fringe-helper-convert ".XX....."
+                               "XXXX...."
+                               "X..X...."
+                               "..XX...."
+                               ".XX....."
+                               ".XX....."
+                               "........"
+                               ".XX....."
+                               ".XX....."))))
 
 (defconst fringe-lib-zig-zag
   `(repeat
     (0 fringe-lib-zig-zag-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert "X......."
-                                 "X......."
-                                 ".X......"
-                                 ".X......"
-                                 "..X....."
-                                 "..X....."
-                                 ".X......"
-                                 ".X......")))))
+       ,(fringe-helper-convert "X......."
+                               "X......."
+                               ".X......"
+                               ".X......"
+                               "..X....."
+                               "..X....."
+                               ".X......"
+                               ".X......"))))
 
 (defconst fringe-lib-wave
   `(repeat
     (0 fringe-lib-wave-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert "X......."
-                                 ".X......"
-                                 "..X....."
-                                 "..X....."
-                                 "..X....."
-                                 ".X......"
-                                 "X......."
-                                 "X.......")))))
+       ,(fringe-helper-convert "X......."
+                               ".X......"
+                               "..X....."
+                               "..X....."
+                               "..X....."
+                               ".X......"
+                               "X......."
+                               "X......."))))
 
 (defconst fringe-lib-stipple
   `(repeat
     (0 fringe-lib-stipple-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert "XXXXXXXX"
-                                 "XXXXXXXX"
-                                 "XXXXXXXX"
-                                 "........"
-                                 "........"
-                                 "........")))))
+       ,(fringe-helper-convert "XXXXXXXX"
+                               "XXXXXXXX"
+                               "XXXXXXXX"
+                               "........"
+                               "........"
+                               "........"))))
 
 (defconst fringe-lib-full
   `(repeat
     (0 fringe-lib-full-0 .
-       ,(eval-when-compile
-          (fringe-helper-convert "XXXXXXXX")))))
+       ,(fringe-helper-convert "XXXXXXXX"))))
 
 (provide 'fringe-helper)
 ;;; fringe-helper.el ends here
