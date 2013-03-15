@@ -6,7 +6,7 @@
 ;; Version: 0.1.1
 ;; Keywords: lisp
 ;; URL: http://nschum.de/src/emacs/fringe-helper/
-;; Compatibility: GNU Emacs 22.x
+;; Compatibility: GNU Emacs 22.x, GNU Emacs 23.x, GNU Emacs 24.x
 ;;
 ;; This file is NOT part of GNU Emacs.
 ;;
