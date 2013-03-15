@@ -1,6 +1,6 @@
 ;;; fringe-helper.el --- helper functions for fringe bitmaps
 ;;
-;; Copyright (C) 2008 Nikolaj Schumacher
+;; Copyright (C) 2008, 2013 Nikolaj Schumacher
 ;;
 ;; Author: Nikolaj Schumacher <bugs * nschum de>
 ;; Version: 0.1.1
