@@ -124,8 +124,8 @@ Each string in STRINGS represents a line of the fringe bitmap as in
 `fringe-helper-convert'."
   (declare (indent defun))
   `(define-fringe-bitmap ,name
-                         (eval-when-compile (fringe-helper-convert ,@strings))
-                         nil nil ,alignment))
+     (eval-when-compile (fringe-helper-convert ,@strings))
+     nil nil ,alignment))
 
 (defun fringe-helper-insert (bitmap pos &optional side face)
   "Insert a fringe bitmap at POS.
@@ -136,8 +136,8 @@ The function returns an object suitable for passing to
 `fringe-helper-remove'."
   (let* ((display-string `(,(or side 'left-fringe) ,bitmap .
                            ,(when face (cons face nil))))
-          (before-string (propertize "!" 'display display-string))
-          (ov (make-overlay pos pos)))
+         (before-string (propertize "!" 'display display-string))
+         (ov (make-overlay pos pos)))
     (overlay-put ov 'before-string before-string)
     (overlay-put ov 'fringe-helper t)
     ov))
@@ -217,8 +217,8 @@ input automatically."
 (defun fringe-lib-load (pattern &optional side)
   "Load a stock bitmap.
 It returns the symbol name of the loaded bitmap, which is suitable for passing
-to `fringe-helper-insert'.  The actual work of defining the bitmap is only done once.
-PATTERN can be one of the following:
+to `fringe-helper-insert'.  The actual work of defining the bitmap is only done
+once. PATTERN can be one of the following:
 
 `fringe-lib-exclamation-mark':  an exclamation mark
 
