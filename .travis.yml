@@ -16,7 +16,8 @@ matrix:
 install:
   - if [ "$EMACS" = "emacs23" ]; then
         sudo apt-get update -qq &&
-        sudo apt-get install -qq emacs23-gtk emacs23-el;
+        sudo apt-get install -qq emacs23-gtk emacs23-el &&
+        mkdir -p lib && curl https://raw.github.com/ohler/ert/c619b56c5bc6a866e33787489545b87d79973205/lisp/emacs-lisp/ert.el > lib/ert.el;
     fi
   - if [ "$EMACS" = "emacs24" ]; then
         sudo add-apt-repository -y ppa:cassou/emacs &&
@@ -33,7 +34,7 @@ install:
 
 script:
   $EMACS --version && find *.el -not -name "tests.el" | xargs $EMACS -Q --batch -l lib/elisp-lint.el -f elisp-lint-files-batch
-  && $EMACS -Q --batch -L . -l ert -l tests.el -f ert-run-tests-batch-and-exit
+  && $EMACS -Q --batch -L lib -L . -l ert -l tests.el -f ert-run-tests-batch-and-exit
 
 notifications:
   email: false
