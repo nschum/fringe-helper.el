@@ -33,6 +33,7 @@ install:
 
 script:
   $EMACS --version && find *.el -not -name "tests.el" | xargs $EMACS -Q --batch -l lib/elisp-lint.el -f elisp-lint-files-batch
+  && $EMACS -Q --batch -L . -l ert -l tests.el -f ert-run-tests-batch-and-exit
 
 notifications:
   email: false
