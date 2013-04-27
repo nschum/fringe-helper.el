@@ -75,6 +75,8 @@
 ;;
 ;;; Change Log:
 ;;
+;;    Fixed overlay leak.  (thanks to Cornelius Mika)
+;;
 ;; 2013-03-24 (1.0)
 ;;    Fixed byte compile error.
 ;;
@@ -171,6 +173,8 @@ input automatically."
     parent))
 
 (defun fringe-helper-modification-func (ov after-p beg end &optional len)
+  (setq beg (max beg (overlay-start ov)))
+  (setq end (min end (overlay-end ov)))
   (if after-p
       (if (eq beg end)
           ;; evaporate overlay
@@ -187,8 +191,6 @@ input automatically."
               (overlay-put fringe-ov 'fringe-helper-parent ov)))))
     ;; if a \n is removed, remove the fringe overlay
     (unless (= beg end)
-      (setq beg (max beg (overlay-start ov)))
-      (setq end (min end (overlay-end ov)))
       (save-excursion
         (goto-char beg)
         (while (search-forward "\n" end t)
