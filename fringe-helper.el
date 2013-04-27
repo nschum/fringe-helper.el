@@ -217,8 +217,8 @@ input automatically."
 (defun fringe-lib-load (pattern &optional side)
   "Load a stock bitmap.
 It returns the symbol name of the loaded bitmap, which is suitable for passing
-to `fringe-helper-insert'.  The actual work of defining the bitmap is only done once.
-PATTERN can be one of the following:
+to `fringe-helper-insert'.  The actual work of defining the bitmap is only done
+once. PATTERN can be one of the following:
 
 `fringe-lib-exclamation-mark':  an exclamation mark
 
