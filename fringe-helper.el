@@ -75,6 +75,8 @@
 ;;
 ;;; Change Log:
 ;;
+;;    Workaround for deleted overlay during callback.
+;;
 ;; 2013-05-10 (1.0.1)
 ;;    Fixed overlay leak.  (thanks to Cornelius Mika)
 ;;
@@ -174,33 +176,35 @@ input automatically."
     parent))
 
 (defun fringe-helper-modification-func (ov after-p beg end &optional len)
-  (setq beg (max beg (overlay-start ov)))
-  (setq end (min end (overlay-end ov)))
-  (if after-p
-      (if (eq beg end)
-          ;; evaporate overlay
-          (when (= (overlay-start ov) (overlay-end ov))
-            (delete-overlay ov))
-        ;; if new lines are inserted, add new bitmaps
-        (let ((before-string (overlay-get ov 'before-string))
-              fringe-ov)
-          (save-excursion
-            (goto-char beg)
-            (while (search-forward "\n" end t)
-              (setq fringe-ov (make-overlay (point) (point)))
-              (overlay-put fringe-ov 'before-string before-string)
-              (overlay-put fringe-ov 'fringe-helper-parent ov)))))
-    ;; if a \n is removed, remove the fringe overlay
-    (unless (= beg end)
-      (save-excursion
-        (goto-char beg)
-        (while (search-forward "\n" end t)
-          (let ((overlays (overlays-in (point) (1+ (point)))))
-            (while overlays
-              (when (eq (overlay-get (car overlays) 'fringe-helper-parent) ov)
-                (delete-overlay (car overlays))
-                (setq overlays nil))
-              (pop overlays))))))))
+  ;; Sometimes this hook is called with a deleted overlay.
+  (when (overlay-start ov)
+    (setq beg (max beg (overlay-start ov)))
+    (setq end (min end (overlay-end ov)))
+    (if after-p
+        (if (eq beg end)
+            ;; evaporate overlay
+            (when (= (overlay-start ov) (overlay-end ov))
+              (delete-overlay ov))
+          ;; if new lines are inserted, add new bitmaps
+          (let ((before-string (overlay-get ov 'before-string))
+                fringe-ov)
+            (save-excursion
+              (goto-char beg)
+              (while (search-forward "\n" end t)
+                (setq fringe-ov (make-overlay (point) (point)))
+                (overlay-put fringe-ov 'before-string before-string)
+                (overlay-put fringe-ov 'fringe-helper-parent ov)))))
+      ;; if a \n is removed, remove the fringe overlay
+      (unless (= beg end)
+        (save-excursion
+          (goto-char beg)
+          (while (search-forward "\n" end t)
+            (let ((overlays (overlays-in (point) (1+ (point)))))
+              (while overlays
+                (when (eq (overlay-get (car overlays) 'fringe-helper-parent) ov)
+                  (delete-overlay (car overlays))
+                  (setq overlays nil))
+                (pop overlays)))))))))
 
 (defun fringe-helper-remove (fringe-bitmap-reference)
   "Remove a fringe bitmap."
