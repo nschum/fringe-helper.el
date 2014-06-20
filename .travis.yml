@@ -17,7 +17,7 @@ install:
   - if [ "$EMACS" = "emacs23" ]; then
         sudo apt-get update -qq &&
         sudo apt-get install -qq emacs23-gtk emacs23-el &&
-        mkdir -p lib && curl https://raw.github.com/ohler/ert/c619b56c5bc6a866e33787489545b87d79973205/lisp/emacs-lisp/ert.el > lib/ert.el;
+        mkdir -p lib && curl https://raw.githubusercontent.com/ohler/ert/c619b56c5bc6a866e33787489545b87d79973205/lisp/emacs-lisp/ert.el > lib/ert.el;
     fi
   - if [ "$EMACS" = "emacs24" ]; then
         sudo add-apt-repository -y ppa:cassou/emacs &&
