@@ -160,7 +160,10 @@ input automatically."
                            ,(when face (cons face nil))))
          (before-string (propertize "!" 'display display-string))
          (parent (make-overlay beg end))
+         (beg (overlay-start parent))
+         (end (overlay-end parent))
          ov)
+         
     (save-excursion
       (goto-char beg)
       (goto-char (point-at-bol 2))
@@ -181,8 +184,8 @@ input automatically."
 (defun fringe-helper-modification-func (ov after-p beg end &optional len)
   ;; Sometimes this hook is called with a deleted overlay.
   (when (overlay-start ov)
-    (setq beg (max beg (overlay-start ov)))
-    (setq end (min end (overlay-end ov)))
+    (setq beg (max (min beg end) (overlay-start ov)))
+    (setq end (min (max beg end) (overlay-end ov)))
     (if after-p
         (if (eq beg end)
             ;; evaporate overlay
